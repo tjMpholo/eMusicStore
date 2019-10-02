@@ -52,16 +52,15 @@ public class HomeController {
     }
 
     @RequestMapping("/admin/productInventory")
-    public String productInventory(Model model) {
+    public String productInventory(Model model){
         List<Product> products = productDao.getAllProducts();
-        model.addAttribute("products", products);
+        model.addAttribute("products",products);
 
         return "productInventory";
     }
 
-
     @RequestMapping("/admin/productInventory/addProduct")
-    public String addProduct(Model model) {
+    public String addProduct(Model model){
         Product product = new Product();
         product.setProductCategory("instrument");
         product.setProductCondition("new");
@@ -73,7 +72,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
-    public String addProductPost(@ModelAttribute("product") Product product) {
+    public String addProductPost(@ModelAttribute("product") Product product){
         productDao.addProduct(product);
 
         return "redirect:/admin/productInventory";
