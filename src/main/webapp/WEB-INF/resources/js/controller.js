@@ -4,7 +4,7 @@ cartApp.controller("cartCtrl", function($scope, $http){
 
     $scope.addToCart = function (productId) {
         $http.put('/eMusicStore/rest/cart/add/'+ productId).success(function () {
-            alert('TEST: 2');
+            alert('Product successfully added to the cart!');
         });
     };
 
@@ -16,7 +16,7 @@ cartApp.controller("cartCtrl", function($scope, $http){
 
 
     $scope.clearCart = function () {
-        $http.delete('/eMusicStore/rest/cart/'+$scope.cartId).success($scope.refreshCart($scope.cartId));
+        $http.delete('/eMusicStore/rest/cart/'+$scope.cartId).success($scope.refreshCart());
     };
 
     $scope.initCartId = function (cartId) {
@@ -26,7 +26,18 @@ cartApp.controller("cartCtrl", function($scope, $http){
 
     $scope.removeFromCart = function (productId) {
         $http.put('/eMusicStore/rest/cart/remove/'+productId).success(function (data) {
-            $scope.refreshCart($http.get('/eMusicStore/rest/cart/cartId'));
+            $scope.refreshCart();
         });
+    };
+
+    $scope.calGrandTotal = function () {
+        var grandTotal=0;
+
+
+        for (var i=0; i<$scope.cart.cartItems.length; i++) {
+            grandTotal+=$scope.cart.cartItems[i].totalPrice;
+        }
+
+        return grandTotal;
     };
 });

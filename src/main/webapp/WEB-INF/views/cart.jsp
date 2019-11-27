@@ -1,4 +1,5 @@
-<%@include file="/WEB-INF/views/template/header.jsp"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@include file="/WEB-INF/views/template/header.jsp" %>
 
 <div class="container-wrapper">
     <div class="container">
@@ -19,6 +20,9 @@
                         <span class="glyphicon glyphicon-remove-sign">
                         </span>
                         Clear Cart
+                    </a>
+                    <a href="<spring:url value="/order/${cartId}"/>" class="btn btn-success pull-right">
+                        <span class="glyphicon-shopping-cart glyphicon"></span>Check out
                     </a>
                  </div>
 
@@ -44,16 +48,17 @@
                     <th></th>
                     <th></th>
                     <th>Grand Total</th>
-                    <th>{{cart.grandTotal}}</th>
+                    <th>{{calGrandTotal()}}</th>
                 </tr>
             </table>
             </div>
 
-            <a href="<spring:url value="productList"/>" class="btn btn-default">Continue Shopping</a>
+            <a href="<c:url value="productList"/>" class="btn btn-default">Continue Shopping</a>
         </section>
     </div>
 </div>
 
+<script src="<c:url value="/resources/js/angular.min.js"/>" > </script>
 <script src="<c:url value="/resources/js/controller.js"/>"></script>
 
 <%@include file="/WEB-INF/views/template/footer.jsp"%>
